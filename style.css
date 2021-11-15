@@ -39,6 +39,7 @@ body{
 
 header img{
   width: 100%;
+  object-fit: cover;
 }
 
 section{
@@ -157,4 +158,61 @@ section{
 s{
   display: flex;
   align-items: center;
+}
+
+/* responsividade  */
+@media only screen and (max-width: 1024px) {
+  header img{
+    height: 40vw;
+  }
+
+  .cont-geral {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  header img{
+    height: 40vw;
+  }
+
+  .cont-geral {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  header img{
+    height: 50vw;
+  }
+
+  .cont-geral {
+    width: 90%;
+  }
+
+  .cont-res{
+    margin-top: 0px;
+  }
+
+  #cont-title{
+    margin: 80px 0px 20px 0px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  header img{
+    height: 70vw;
+  }
+
+  .cont-geral {
+    width: 90%;
+  }
+
+  .cont-res{
+    margin-top: 0px;
+  }
+
+  #cont-title{
+    margin: 80px 0px 20px 0px;
+  }
 }
