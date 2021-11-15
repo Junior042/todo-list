@@ -18,9 +18,8 @@ function up(e){
     arr = JSON.parse(localStorage.getItem('banco')) /*o arr resebe o banco toda vez que a pagina é dada reload*/
 
     localStorage.getItem('banco') != null 
-      ? arr.push({dado: entradado, checked: true}) 
+      ? arr.push({dado: entradado, checked: false}) 
       : arr = [{dado: entradado, checked: false}];
-
 
     localStorage.setItem('banco', JSON.stringify(arr))
     list()
