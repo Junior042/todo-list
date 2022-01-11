@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To Do List 2.0</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!--FONT-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Roboto:wght@100;300;400;500;700&family=Vujahday+Script&display=swap"
+    rel="stylesheet">
 
-  <!-- font  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Spartan:wght@700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <section>
+        <div class="container-login">
+            <h2>Login</h2>
+            <div class="aviso off">
+                <p>Suas credenciais estão Incorretas! Verifique as informações!</p>
+            </div>
+            <label for="usuario">Usuario</label>
+            <input placeholder="Enter User"  type="text" id="usuario">
+            <label for="password">Password</label>
+            <input placeholder="Enter Password"  type="password" id="password">
+            <label for="email">Email</label>
+            <input  placeholder="Enter Email" type="text" id="email">
+            <span class="container-remember">
+                <input type="checkbox" id="remember">
+                <p>Remember me</p>
+            </span>
+            <button onclick="logar()">Sign in</button>
+        </div>
+    </section>
 
-  <header id="img-header">
-    <img id="img-header" src="./images/bg-desktop-dark.jpg" alt="">
-  </header>
-  <section>
-    <div class="cont-geral">
-      <div id="cont-title">
-        <h1>TODO</h1>
-        <input onclick="light()" type="radio">
-      </div>
-    
-      <input 
-      type="text" 
-      id="entra-dados" 
-      placeholder="Digite sua tarefa aqui..."
-      />
-    
-      <div class="cont-res"></div>
-    </div>
-  </section>
 
-  <script src="main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
