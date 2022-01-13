@@ -2,3 +2,5 @@
 ## url para (visualização):
 <a href="https://junior042.github.io/todo-list/">Clique aq para Visualizar</a>
 <img src="./design/desktop-design-dark.jpg">
+---
+- desenvolvido Por Edu.jr004
