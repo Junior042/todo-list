@@ -148,6 +148,13 @@ section{
   align-items: center;
 }
 
+#user_perfil{
+  color: white;
+  font-family: 'Josefin Sans';
+  text-align: center;
+  margin-top: 10px;
+}
+
 /* quando item tiver com essa class ele fica com um risco no meio  */
 .checked{
   text-decoration: line-through;

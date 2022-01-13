@@ -1,4 +1,7 @@
+window.onload = perfil()
+
 // Variaveis 
+const userPerfil = document.querySelector('#user_perfil');
 let cont = document.querySelector('.cont-res')
 let arr = [];
 
@@ -85,4 +88,30 @@ function light(){
     <img src="./images/bg-desktop-light.jpg" alt="">
     `;
   }
+}
+
+
+// funções de perfil e descript do perfil
+function perfil(){
+  const crypt = JSON.parse(localStorage.getItem('session'));
+  if(crypt.dados_aleatorios.length == 1){
+    descryptUser(crypt.dados_aleatorios[0]);
+  }
+  if(crypt.dados_aleatorios.length == 2){
+    descryptUser(crypt.dados_aleatorios[1]);
+  }
+}
+
+function descryptUser(crypt){
+  fetch('http://localhost:5000/descryptUser', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({crypt})
+  })
+    .then((res) => res.json()
+    .then((res2) => {
+      userPerfil.innerText = `Seja bem vindo: ${res2}`
+    }))
 }

@@ -24,13 +24,13 @@ function logar()
         body: JSON.stringify({user, pass, email})
     })
         .then((res) => res.json()
-        .then((res2) => {
-             redireciona(res2)
-             salvaInfos(res2)
+        .then((res2) => { 
+            redireciona(res2)
+            salvaInfos(res2)
         })
     );
 }
-
+//                        edujr004@gmail.com
 function redireciona(res)
 {
     avisa(res)
@@ -53,6 +53,9 @@ function salvaInfos(status)
 {
     const input_remember = document.querySelector('#remember').checked
     if(input_remember){
-        status && localStorage.setItem('session', JSON.stringify({ authorized_session: true}));
+        status && localStorage.setItem('session', JSON.stringify({ authorized_session: status.session, dados_aleatorios: status.infoUser }));
+    }
+    if(!input_remember){
+        status && localStorage.setItem('session', JSON.stringify({dados_aleatorios: [status.infoUser[1]]}))
     }
 }
