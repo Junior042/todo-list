@@ -6,7 +6,7 @@ let cont = document.querySelector('.cont-res')
 let arr = [];
 
 // lista quando a pagina inicia 
-list()
+//list()
 
 // Quando aperta enter 
 document.querySelector("#entra-dados")
@@ -21,10 +21,7 @@ function up(e){
   
   if(e.keyCode == 13){
     const dadoId = JSON.parse(localStorage.getItem('session'));
-    let IdUser;
-    if(!!dadoId.dados_aleatorios[0] == true){
-      IdUser = dadoId.dados_aleatorios[0]
-    }
+    let IdUser = !!dadoId.dados_aleatorios[0] && dadoId.dados_aleatorios[0];
     
     if(!!entradado.length){
       let dadosProduto = {
@@ -40,41 +37,47 @@ function up(e){
         body: JSON.stringify(dadosProduto)
       })
       .then((res) => res.json()
-      .then((res2) => console.log(res2)));
+      .then((res2) => res2 && list(IdUser)));
     }
 
   };
 }
 
 // Funçao que lista as tarefas na tela 
-function list(){
-  let teste = JSON.parse(localStorage.getItem('banco'))
+function list(userId){
 
-  cont.innerHTML = '';
-  for (let i in teste){
-    cont.innerHTML += `
-    <div class="cont-linha-tarefa">
-      <span class="cont-span ${teste[i].checked == true ? "checked" : ''}" id="cont-span${i}">
-        <div class="bolinha" id="bolinha${i}" onclick="risca(${i})"></div>
-        <p>${teste[i].dado}</p>
-      </span>
-      <img src="./images/x.svg" alt="Close" onclick="del(${i})" class="img-close"/>
-    </div>
-    `;
-  } 
+  fetch('http://localhost:5000/ReadProducts',{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({userId})
+  })
+  .then((res) => res.json()
+  .then((res2) => renderList(res2)))
+
   document.querySelector("#entra-dados").value = '';
 }
 
-// Função que faz um up no localStorage 
-function upLocalStorage(){
-  localStorage.setItem('banco', JSON.stringify(arr))
+function renderList(dados){
+  cont.innerHTML = '';
+  dados.map((dado) => {
+    cont.innerHTML += `
+    <div class="cont-linha-tarefa">
+      <span class="cont-span " id="cont-span${dado.id}">
+        <div class="bolinha" id="bolinha${dado.id}" onclick="risca(${dado.id})"></div>
+        <p>${dado.name}</p>
+      </span>
+      <img src="./images/x.svg" alt="Close" onclick="del(${dado.id})" class="img-close"/>
+    </div>`
+  })
 }
 
-// Função que deleta a linha da tarefa respectiva 
 function del(dado){
-  arr.splice(dado, 1);
-  upLocalStorage()
-  list();
+  const dadoId = JSON.parse(localStorage.getItem('session'));
+  let IdUser = !!dadoId.dados_aleatorios[0] && dadoId.dados_aleatorios[0];
+  fetch(`http://localhost:5000/DeleteProduto/${dado}`)
+  .then(() => list(IdUser))
 }
 
 // Função que risca a linha com a tarefa respectiva 
