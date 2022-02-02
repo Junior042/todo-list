@@ -14,18 +14,35 @@ document.querySelector("#entra-dados")
     up(e)
   });
 
-// Funções 
+// Funções
+// Create Product
 function up(e){
   let entradado = document.querySelector("#entra-dados").value
+  
   if(e.keyCode == 13){
-    arr = JSON.parse(localStorage.getItem('banco')) /*o arr resebe o banco toda vez que a pagina é dada reload*/
+    const dadoId = JSON.parse(localStorage.getItem('session'));
+    let IdUser;
+    if(!!dadoId.dados_aleatorios[0] == true){
+      IdUser = dadoId.dados_aleatorios[0]
+    }
+    
+    if(!!entradado.length){
+      let dadosProduto = {
+        "name": entradado,
+        "checked": false,
+        "userId": IdUser
+      }
+      fetch('http://localhost:5000/CreateProducts',{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dadosProduto)
+      })
+      .then((res) => res.json()
+      .then((res2) => console.log(res2)));
+    }
 
-    localStorage.getItem('banco') != null 
-      ? arr.push({dado: entradado, checked: false}) 
-      : arr = [{dado: entradado, checked: false}];
-
-    localStorage.setItem('banco', JSON.stringify(arr))
-    list()
   };
 }
 
