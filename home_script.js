@@ -1,4 +1,7 @@
 window.onload = perfil()
+const dadoId = JSON.parse(localStorage.getItem('session'));
+let IdUser = !!dadoId.dados_aleatorios[0] && dadoId.dados_aleatorios[0];
+list(IdUser)
 
 // Variaveis 
 const userPerfil = document.querySelector('#user_perfil');
@@ -20,9 +23,6 @@ function up(e){
   let entradado = document.querySelector("#entra-dados").value
   
   if(e.keyCode == 13){
-    const dadoId = JSON.parse(localStorage.getItem('session'));
-    let IdUser = !!dadoId.dados_aleatorios[0] && dadoId.dados_aleatorios[0];
-    
     if(!!entradado.length){
       let dadosProduto = {
         "name": entradado,
@@ -64,8 +64,8 @@ function renderList(dados){
   dados.map((dado) => {
     cont.innerHTML += `
     <div class="cont-linha-tarefa">
-      <span class="cont-span " id="cont-span${dado.id}">
-        <div class="bolinha" id="bolinha${dado.id}" onclick="risca(${dado.id})"></div>
+      <span class="cont-span ${!!dado.checked && 'checked'}" id="cont-span${dado.id}">
+        <div class="bolinha" id="bolinha" onclick="update(${dado.id})"></div>
         <p>${dado.name}</p>
       </span>
       <img src="./images/x.svg" alt="Close" onclick="del(${dado.id})" class="img-close"/>
@@ -74,10 +74,33 @@ function renderList(dados){
 }
 
 function del(dado){
-  const dadoId = JSON.parse(localStorage.getItem('session'));
-  let IdUser = !!dadoId.dados_aleatorios[0] && dadoId.dados_aleatorios[0];
   fetch(`http://localhost:5000/DeleteProduto/${dado}`)
   .then(() => list(IdUser))
+}
+
+function update(dado) {
+  const linha = document.querySelector(`#cont-span${dado}`);
+  let setChecked = null;
+
+  linha.classList[1] == 'checked' ? setChecked = false : setChecked = true
+
+  let dadosUpdate = {
+    "id_Prod": dado,
+    "checked": setChecked
+  }
+
+  
+
+  fetch('http://localhost:5000/UpdateProducts',{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dadosUpdate)
+  })
+  .then((res) => res.json()
+  .then((res2) => list(IdUser) ));
+
 }
 
 // Função que risca a linha com a tarefa respectiva 
