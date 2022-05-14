@@ -5,7 +5,7 @@ function verificaLogin()
     let autenticate = localStorage.getItem('session')
     if(autenticate){
         if (JSON.parse(autenticate).authorized_session) {
-            window.location.href = "/home.html";
+            window.location.href = "/pages/home.html";
         }
     }
 }
@@ -34,7 +34,7 @@ function logar()
 function redireciona(res)
 {
     avisa(res)
-    if(res) window.location.href = "/home.html";
+    if(res) window.location.href = "/pages/home.html";
 }
 
 function avisa(res)

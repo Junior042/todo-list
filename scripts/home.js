@@ -38,7 +38,7 @@ function list(){
         <div class="bolinha" id="bolinha${i}" onclick="risca(${i})"></div>
         <p>${teste[i].dado}</p>
       </span>
-      <img src="./images/x.svg" alt="Close" onclick="del(${i})" class="img-close"/>
+      <img src="../assets/images/x.svg" alt="Close" onclick="del(${i})" class="img-close"/>
     </div>
     `;
   } 
@@ -82,7 +82,7 @@ function light(){
     cont_res.style.background = "white"
     let header = document.querySelector('header')
     header.innerHTML = `
-    <img src="./images/bg-desktop-light.jpg" alt="">
+    <img src="../assets/images/bg-desktop-light.jpg" alt="">
     `;
   }
 }
